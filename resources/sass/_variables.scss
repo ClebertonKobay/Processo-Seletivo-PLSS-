@@ -1,0 +1,108 @@
+// Body
+$body-bg: #f8fafc;
+
+// Typography
+$font-family-sans-serif: 'Nunito', sans-serif;
+$font-size-base: 0.9rem;
+$line-height-base: 1.6;
+
+$detail-bg: #315DA3;
+
+.w-80{
+    width: 80%;
+}
+
+.w-4{
+    width: 4%;
+}
+.w-8{
+    width: 8%;
+}
+
+.w-16{
+    width: 16%;
+}
+
+.w-12{
+    width: 12%;
+}
+
+.w-88{
+    width: 88%;
+}
+
+.w-84{
+    width: 84%;
+}
+
+.w-80{
+    height: 80%;
+}
+
+.h-4{
+    height: 4%;
+}
+.h-8{
+    height: 8%;
+}
+
+.h-16{
+    height: 16%;
+}
+
+.h-12{
+    height: 12%;
+}
+
+.h-88{
+    height: 88%;
+}
+
+.h-84{
+    height: 84%;
+}
+
+.min-vh-54{
+    min-height: 54rem;
+}
+
+.min-vh-44{
+    min-height: 44rem;
+}
+
+.min-vh-48{
+    min-height: 48rem;
+}
+
+.min-vh-52{
+    min-height: 52rem;
+}
+
+.min-vh-56{
+    min-height: 56rem;
+}
+
+.min-vh-60{
+    min-height: 60rem;
+}
+
+.bg-offwhite{
+    background-color: #f0eeeb;
+}
+.bg-custom-blue{
+    background-color: #325ac7;
+}
+
+.bg-custom-black{
+    background-color: #101112;
+}
+
+.bg-custom{
+    background-color: $detail-bg !important;
+    background: $detail-bg !important;
+    color: ghostwhite !important;
+}
+
+.round-sidebar{
+    border-radius: 0 24px 0 0;
+}
