@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Chamados;
 use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -13,7 +14,40 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        Chamados::where('');
+        $QtdchamadosResolvidos = Chamados::all()->count();
+        $QtdchamadosCriados = Chamados::all()->count();
+
+        $diasgrafico = [];
+        $dt = Carbon::now()->startOfMonth();
+        $dt2 = Carbon::now();
+        $dias = CarbonPeriod::create($dt, $dt2)->toArray();
+        foreach ($dias as $dia) {
+            $diasgrafico[] = $dia->format('d');
+        }
+
+        $chamadosCriadosPorDia = [];
+        foreach ($dias as $dia) {
+            $chamadosCriadosPorDia[$dia->format('d')] = Chamados::whereDate('created_at', $dia)
+                ->count();
+        }
+
+        $chamadosResolvidosPorDia = [];
+        foreach ($dias as $dia) {
+            $chamadosResolvidosPorDia[$dia->format('d')] = Chamados::whereDate('created_at', $dia)
+                ->where('situacao_id', 3)
+                ->count();
+        }
+
+
+        return response()->json(
+            [
+                'dias' => $diasgrafico,
+                'chamadosCriados' => $chamadosCriadosPorDia,
+                'chamadosResolvidos' => $chamadosResolvidosPorDia,
+                'QtdchamadosCriados' => $QtdchamadosCriados,
+                'QtdchamadosResolvidos' => $QtdchamadosResolvidos,
+            ]
+        );
     }
 
     /**

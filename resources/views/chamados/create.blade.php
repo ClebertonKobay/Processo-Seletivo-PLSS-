@@ -36,12 +36,3 @@
         </div>
     </div>
 @endsection
-
-@push('js')
-{{--    <script type="module">--}}
-{{--        $('#forms').on('submit', function (e) {--}}
-{{--            e.preventDefault()--}}
-{{--            console.log($(this).serializeArray())--}}
-{{--        })--}}
-{{--    </script>--}}
-@endpush

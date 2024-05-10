@@ -15,55 +15,57 @@
             </div>
         </div>
     </div>
-    @push('js')
-        <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/js/adminlte.min.js"></script>
-        <script>
-            function grafico(data) {
-                let ctx = document.getElementById('myChart').getContext('2d');
 
-                let myChart = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: data.map(entry => entry.dayName),
-                        datasets: [{
-                            label: "N° chamados atendidos",
-                            data: data.map(entry => entry.countC),
-                            borderWidth: 1
-                        }, {
-                            label: "N° chamados criados",
-                            data: data.map(entry => entry.countD),
-                            borderWidth: 1
-                        }],
-                    },
-                    options: {
-                        animation: true,
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                stepSize: 1,
-                                ticks: {
-                                    precision: 0 // Configuração para exibir apenas números inteiros
-                                }
+@endsection
+@push('js')
+    <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/js/adminlte.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="module">
+        function grafico(dados) {
+            let ctx = document.getElementById('myChart').getContext('2d');
+
+            console.log(dados);
+            let myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: dados.dias.map(entry => entry),
+                    datasets: [{
+                        label: "N° chamados atendidos",
+                        data: dados.chamadosResolvidos,
+                        borderWidth: 1
+                    }, {
+                        label: "N° chamados criados",
+                        data: dados.chamadosCriados,
+                        borderWidth: 1
+                    }],
+                },
+                options: {
+                    animation: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            stepSize: 1,
+                            ticks: {
+                                precision: 0 // Configuração para exibir apenas números inteiros
                             }
                         }
                     }
-                });
-            }
-
-            $(document).ready(function () {
-                $.ajax({
-                    url: '{{ route('dashboard.index') }}',
-                    type: 'GET',
-                    success: function (response) {
-                        grafico(response.data);
-                    },
-                    error: function (error) {
-                        console.error(error);
-                    }
-                });
+                }
             });
+        }
 
-        </script>
+        $(document).ready(function () {
+            $.ajax({
+                url: '{{ route('dashboard.index') }}',
+                type: 'GET',
+                success: function (response) {
+                    grafico(response);
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+        });
 
-    @endpush
-@endsection
+    </script>
+@endpush
